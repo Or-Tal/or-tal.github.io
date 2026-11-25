@@ -138,6 +138,7 @@ body { touch-action: pan-y pinch-zoom; }
 .contact-portrait { display: block; width: min(48%, 420px); height: auto; border-radius: 16px; }
 
 @media (max-width: 760px) {
+  .hero p { font-size: 1.1rem; }
   .contact { gap: 24px; }
   .contact-portrait { width: min(100%, 420px); }
 }
