@@ -20,12 +20,20 @@
 .publication-meta strong{color:var(--ink)}
 .publication-author { text-decoration: underline #377d75 2px; text-underline-offset: 4px; }
 .publication-honor { text-decoration: underline #e8663d 2px; text-underline-offset: 4px; }
-.publication-links{display:flex;flex-wrap:wrap;gap:8px 18px}
-.publication-links a{color:#377d75;text-decoration:underline;text-underline-offset:3px;font-size:.88rem;font-weight:650}
-.publication-links a:hover{color:#245e58}
-.publication-links { align-items: center; }
-.publication-cite { padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: #286862; font: inherit; font-size: .88rem; font-weight: 650; cursor: pointer; }
-.publication-cite:hover { border-color: #377d75; }
+.publication-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.publication-links a, .publication-cite, .publication-explainer {
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  color: #286862;
+  font: inherit;
+  font-size: .9rem;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+}
+.publication-links a:hover, .publication-cite:hover, .publication-explainer:hover { border-color: #377d75; }
 .citation-toast {
   position: fixed;
   z-index: 1100;
@@ -60,17 +68,7 @@
   place-self: start;
   margin-inline-start: 6rem;
   width: fit-content;
-  padding: 5px 12px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--card);
-  color: #286862;
-  font: inherit;
-  font-size: .9rem;
-  font-weight: 650;
-  cursor: pointer;
 }
-.publication-explainer:hover { border-color: #377d75; }
 .explainer-dialog {
   box-sizing: border-box;
   width: calc(100% - 24px);
