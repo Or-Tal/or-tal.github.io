@@ -29,6 +29,7 @@ function showPanel(animate = false) {
     if (active) link.setAttribute("aria-current", "page");
     else link.removeAttribute("aria-current");
   });
+  trackTabView(nextPanel.id);
   if (focusWasInPanel) panelLinks[panels.indexOf(nextPanel)].focus({preventScroll: true});
   if (animate) window.scrollTo({top: 0, behavior: "instant"});
   if (!shouldSlide) return;
