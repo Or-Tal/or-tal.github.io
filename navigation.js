@@ -8,6 +8,7 @@ let touchStart;
 let sidewaysDistance = 0;
 let wheelHandled = false;
 let wheelTimer;
+let wheelTarget;
 
 function showPanel(animate = false) {
   const index = panelLinks.findIndex(link => link.hash === location.hash);
@@ -60,20 +61,20 @@ function navigateToPanel(link) {
 }
 
 function navigateSideways(step, target) {
-  if (target.closest(".publication-pages") && turnPage(step)) return;
+  if (target.closest("#publications") && turnPage(step)) return;
   const nextLink = panelLinks[panels.indexOf(currentPanel) + step];
   if (nextLink) navigateToPanel(nextLink);
 }
 
-panelsContainer.addEventListener("pointerdown", event => {
+document.addEventListener("pointerdown", event => {
   if (event.pointerType !== "touch") return;
-  touchStart = event.isPrimary
+  touchStart = event.isPrimary && !event.target.closest("dialog")
     ? {id: event.pointerId, x: event.clientX, y: event.clientY, target: event.target}
     : null;
 });
 
-panelsContainer.addEventListener("pointercancel", () => { touchStart = null; });
-panelsContainer.addEventListener("pointerup", event => {
+document.addEventListener("pointercancel", () => { touchStart = null; });
+document.addEventListener("pointerup", event => {
   if (touchStart?.id !== event.pointerId) return;
   const {x, y, target} = touchStart;
   touchStart = null;
@@ -84,13 +85,15 @@ panelsContainer.addEventListener("pointerup", event => {
   }
 });
 
-panelsContainer.addEventListener("wheel", event => {
-  if (event.ctrlKey || Math.abs(event.deltaX) <= 1.5 * Math.abs(event.deltaY)) return;
+document.addEventListener("wheel", event => {
+  if (event.ctrlKey || event.target.closest("dialog") || Math.abs(event.deltaX) <= 1.5 * Math.abs(event.deltaY)) return;
   event.preventDefault();
+  wheelTarget ??= event.target;
   clearTimeout(wheelTimer);
   wheelTimer = setTimeout(() => {
     sidewaysDistance = 0;
     wheelHandled = false;
+    wheelTarget = undefined;
   }, 180);
   if (wheelHandled) return;
 
@@ -98,7 +101,7 @@ panelsContainer.addEventListener("wheel", event => {
   sidewaysDistance += event.deltaX * units;
   if (Math.abs(sidewaysDistance) >= 55) {
     wheelHandled = true;
-    navigateSideways(Math.sign(sidewaysDistance), event.target);
+    navigateSideways(Math.sign(sidewaysDistance), wheelTarget);
   }
 }, {passive: false});
 

@@ -99,7 +99,8 @@ html:has(.explainer-dialog[open]) { overflow: hidden; scrollbar-gutter: stable; 
 .about-links{margin-top:18px}
 .contact-actions .btn{font-family:inherit;cursor:pointer}
 
-.site-panels { overflow-x: clip; touch-action: pan-y pinch-zoom; }
+body { touch-action: pan-y pinch-zoom; }
+.site-panels { overflow-x: clip; }
 .site-panels.is-sliding { display: grid; }
 .site-panels.is-sliding > section { grid-area: 1 / 1; min-width: 0; align-self: start; }
 .site-panels > section[hidden] { display: none; }
